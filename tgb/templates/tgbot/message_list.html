@@ -1,0 +1,41 @@
+{% extends "tgbot/base.html" %}
+{% load static %}
+
+{% block title %}Список сообщений{% endblock %}
+{% block content %}
+
+{%for message in messages%}
+    <h4 class="extra">{{message}}</h4>
+{%endfor%}
+ 
+<div class="sort-block">
+  <span class="sort-item">Сортировать по отправителю:</span>
+  <ol>
+  {% for client in clients %}
+    <li>
+       <a class="sort-item" href='?sort={{client.name}}'> {{client.name}} </a>
+    </li>
+  {% endfor %}
+  </ol>
+</div>
+
+<div class="row">
+  <ol>
+  {% for message in object_list %}
+    <li>
+      <div>{{message.client}}&nbsp; &nbsp; {{message.created_at}}<p>{{message.text}}</p><p></p></div>
+       
+    </li>
+  {% endfor %}
+  </ol>
+</div>
+
+ <style>
+.extra {
+  color: #2e56a1;
+  text-align: center;
+  font-weight: normal;
+  font-size: 18px;
+}
+</style> 
+{% endblock %}
